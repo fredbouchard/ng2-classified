@@ -1,6 +1,6 @@
-# ng2-play.ts
+# ng2-classifieds.ts
 
-A minimal [Angular2](https://angular.io/) playground using [TypeScript](http://www.typescriptlang.org/) and [SystemJS loader](https://github.com/systemjs/systemjs)
+A minimal [Angular2](https://angular.io/) classifieds app using [TypeScript](http://www.typescriptlang.org/), [SystemJS loader](https://github.com/systemjs/systemjs), [SASS](http://sass-lang.com/) and [LiveReload](http://livereload.com/)
 
 ## Install
 

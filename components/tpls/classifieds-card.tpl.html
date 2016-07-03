@@ -1,0 +1,21 @@
+<div class="row">
+    <div *ngFor="#classified of classifieds" class="col-sm-4">
+        <div class="thumbnail">
+            <img src="{{ classified.image }}">
+            <div class="caption">
+                <h2>{{ classified.title }}</h2>
+                <h3>{{ classified.price | currency: 'CAD':true}}</h3>
+                <p *ngIf="!classified.showContact">{{ classified.description }}</p>
+                <div *ngIf="classified.showContact">
+                    <contact-details [classified] = "classified"></contact-details>
+                </div>
+                <button 
+                    (click)="classified.showContact = !classified.showContact"
+                    class="btn btn-primary">
+                    {{ !classified.showContact ? 'Contact' : 'Details' }}
+                </button>
+               
+            </div>
+        </div>
+    </div>
+</div>

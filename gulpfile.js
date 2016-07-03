@@ -1,26 +1,40 @@
-var gulp = require('gulp');
+var gulp       = require('gulp'),
+    livereload = require('gulp-livereload'),
+    sass       = require('gulp-sass');
 
 var PATHS = {
-    src: 'src/**/*.ts'
-};
+        toWatch: ['components/**/*.*','src/**/*.ts','src/**/*.scss','index.html']
+    }
+
 
 gulp.task('clean', function (done) {
     var del = require('del');
     del(['dist'], done);
 });
 
+gulp.task('sass', function(){
+     return gulp.src('./src/**/*.scss')
+            .pipe(sass().on('error', sass.logError))
+            .pipe(gulp.dest('./css'))
+            .pipe(livereload());
+})
+
 gulp.task('ts2js', function () {
     var typescript = require('gulp-typescript');
     var tscConfig = require('./tsconfig.json');
 
     var tsResult = gulp
-        .src([PATHS.src, 'node_modules/angular2/typings/browser.d.ts'])
+        .src(['src/**/*.ts', 'node_modules/angular2/typings/browser.d.ts'])
         .pipe(typescript(tscConfig.compilerOptions));
 
-    return tsResult.js.pipe(gulp.dest('dist'));
+    return tsResult
+            .js
+            .pipe(gulp.dest('./dist'))
+            .pipe(livereload());
 });
 
 gulp.task('play', ['ts2js'], function () {
+    var server = livereload.listen({ basePath: 'dist' });
     var http = require('http');
     var connect = require('connect');
     var serveStatic = require('serve-static');
@@ -28,7 +42,7 @@ gulp.task('play', ['ts2js'], function () {
 
     var port = 9000, app;
 
-    gulp.watch(PATHS.src, ['ts2js']);
+    gulp.watch(PATHS.toWatch, ['ts2js', 'sass']);
 
     app = connect().use(serveStatic(__dirname));
     http.createServer(app).listen(port, function () {

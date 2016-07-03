@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Angular2 playground</title>
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="./css/styles.css">
 </head>
 
 <body>
-    <hello-app>Loading...</hello-app>
+	<nav class="nav navbar-default">
+		<div class="navbar-header">
+			<a href="#" class="navbar-brand">Angular 2 Classifieds</a>
+		</div>
+	</nav>
+	<div class="container">
+    	<app>Loading...</app>
+	</div>
 </body>
 
 <!-- ES6-related imports -->
@@ -19,9 +29,21 @@
 </script>
 <script src="/node_modules/rxjs/bundles/Rx.js"></script>
 <script src="/node_modules/angular2/bundles/angular2.js"></script>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.0.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCZDKnLa-oif8iBKFw6YCPk6f3t88E9eHs",
+    authDomain: "ngclassifieds-5d665.firebaseapp.com",
+    databaseURL: "https://ngclassifieds-5d665.firebaseio.com",
+    storageBucket: "ngclassifieds-5d665.appspot.com",
+  };
+  firebase.initializeApp(config);
+</script>
 <script>
     //bootstrap the Angular2 application
-    System.import('dist/hello').catch(console.log.bind(console));
+    System.import('dist/app').catch(console.log.bind(console));
 </script>
 
 </html>
